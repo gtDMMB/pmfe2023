@@ -636,7 +636,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-697, 25));
+        REQUIRE(energy == pmfe::Rational(-279,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -653,7 +653,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-1669, 50));
+        REQUIRE(energy == pmfe::Rational(-167,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -670,7 +670,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-2067, 50));
+        REQUIRE(energy == pmfe::Rational(-207,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -687,7 +687,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-806, 25));
+        REQUIRE(energy == pmfe::Rational(-323,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -704,7 +704,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-2729, 100));
+        REQUIRE(energy == pmfe::Rational(-137,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -772,7 +772,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-617, 25));
+        REQUIRE(energy == pmfe::Rational(-247,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -841,12 +841,12 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-5034, 25));
+        REQUIRE(energy == pmfe::Rational(-143, 5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
         REQUIRE(scored_structure.old_string() ==
-                "((....)((((...)(....))((...)((.......)((...)))))(((...)(....))(....)))).");
+                "(((((((.(((...((....))...(((((.......)))))..)))(((((.......)))))))))))).");
     }
 
     SECTION("onivara_old_15, d1") {
@@ -858,12 +858,12 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-143, 5));
+        REQUIRE(energy == pmfe::Rational(-2019, 10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
         REQUIRE(scored_structure.old_string() ==
-                "(((((((.(((...((....))...(((((.......)))))..)))(((((.......)))))))))))).");
+                "(((...)((...)(((....)(...))(....).)))(((...)(...)((...)(....)))(...)).).");
     }
 
     SECTION("onivara_old_16, d1") {
@@ -875,7 +875,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-35461, 100));
+        REQUIRE(energy == pmfe::Rational(-1776,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -892,7 +892,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-5172, 25));
+        REQUIRE(energy == pmfe::Rational(-1036,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -909,7 +909,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-3723, 10));
+        REQUIRE(energy == pmfe::Rational(-3729, 10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -926,7 +926,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-3873, 100));
+        REQUIRE(energy == pmfe::Rational(-194,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -960,7 +960,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-1939, 20));
+        REQUIRE(energy == pmfe::Rational(-195,2));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -977,7 +977,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-1271, 50));
+        REQUIRE(energy == pmfe::Rational(-128,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1028,7 +1028,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-12202, 25));
+        REQUIRE(energy == pmfe::Rational(-4887,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1079,7 +1079,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(108, 5));
+        REQUIRE(energy == pmfe::Rational(-108,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1096,7 +1096,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(108, 5));
+        REQUIRE(energy == pmfe::Rational(-108, 5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1113,7 +1113,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-5337/10));
+        REQUIRE(energy == pmfe::Rational(-5341,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1130,7 +1130,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-3901, 50));
+        REQUIRE(energy == pmfe::Rational(-393,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1147,7 +1147,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-2297, 50));
+        REQUIRE(energy == pmfe::Rational(-231,5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
@@ -1164,12 +1164,12 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-858, 5));
+        REQUIRE(energy == pmfe::Rational(-861, 5));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 
         REQUIRE(scored_structure.old_string() ==
-                "(..............(....)......................(....).....................).");
+                "(.....(...)....(....).................................................).");
     }
 
     SECTION("onivara_old_34, d1") {
@@ -1181,7 +1181,7 @@ TEST_CASE("O. nivara tRNA (old) MFE", "[mfe][biological][onivara-old][trna]") {
 
         pmfe::Rational energy = energy_model.minimum_energy(seq_annotated);
 
-        REQUIRE(energy == pmfe::Rational(-5629, 100));
+        REQUIRE(energy == pmfe::Rational(-567,10));
 
         pmfe::RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
 

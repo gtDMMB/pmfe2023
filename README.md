@@ -123,6 +123,6 @@ The source for pmfe is released under the GNU General Public License as publishe
 [boost]: //www.boost.org
 [boost-getstarted]: //www.boost.org/doc/libs/1_57_0/more/getting_started/unix-variants.html
 [cmake]: //www.cmake.org/download/
-[gtfold]: //gtfold.sourceforge.net/
+[gtfold]: http://gtfold.sourceforge.net/
 [docker]: //docker.io/
 [catch]: //github.com/philsquared/Catch

@@ -42,11 +42,15 @@ namespace pmfe {
         RNASequence sequence;
         dangle_mode dangles;
         std::map<FPoint, RNAStructureWithScore, compare_fp> structures;
+        Rational multiloop_weight;
+        bool scale_b_param;
 
+        RNAPolytope(RNASequence sequence, dangle_mode dangles, Rational multiloop_weight);
         RNAPolytope(RNASequence sequence, dangle_mode dangles);
 
         BBP::FPoint vertex_oracle(BBP::FVector objective);
         void write_to_file(const fs::path poly_file) const;
+        BBP::FPoint remove_b_param(BBP::FPoint point);
 
     protected:
         void hook_preinit();

@@ -65,7 +65,7 @@ int main(int argc, char * argv[]) {
     fs::path seq_file (vm["sequence"].as<std::string>());
     pmfe::RNASequence sequence(seq_file);
 
-    pmfe::RNAPolytope poly(sequence, dangles);
+    pmfe::RNAPolytope poly(sequence, dangles, pmfe::Rational("0"));
     poly.build();
 
     poly.print_statistics();

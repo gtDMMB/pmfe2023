@@ -22,6 +22,7 @@
 namespace fs = boost::filesystem;
 
 namespace pmfe {
+    //For complete polytope
     ParameterVector fv_to_pv(BBP::FVector v) {
         ParameterVector pv (
             mpq_class(v.cartesian(0).mpq()),
@@ -32,6 +33,7 @@ namespace pmfe {
         return pv;
     };
 
+    //For b-slice
     ParameterVector fv_to_pv(BBP::FVector v, Rational multi) {
         ParameterVector pv(
             mpq_class(v.cartesian(0).mpq()),
@@ -47,7 +49,8 @@ namespace pmfe {
         BBP::FPoint result(4, values.begin(), values.end());
         return result;
     };
-
+    
+    //Constructor for full 4D calculation
     RNAPolytope::RNAPolytope(RNASequence sequence, pmfe::dangle_mode dangles):
         BBPolytope(4),
         sequence(sequence),
@@ -55,6 +58,7 @@ namespace pmfe {
         scale_b_param(false)
         {};
 
+    //Constructor for b-slice
     RNAPolytope::RNAPolytope(RNASequence sequence, pmfe::dangle_mode dangles, Rational m_weight):
         BBPolytope(3),
         sequence(sequence),
@@ -116,7 +120,7 @@ namespace pmfe {
         BBP::FPoint out(
             point.homogeneous(0), 
             point.homogeneous(2), 
-            point.homogeneous(3), //+(point.homogeneous(1)*multiloop_weight)), 
+            point.homogeneous(3)+(point.homogeneous(1)*multiloop_weight), 
             1
             );
         return out;

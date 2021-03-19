@@ -29,6 +29,7 @@ int main(int argc, char * argv[]) {
         ("outfile,o", po::value<std::string>(), "Output file")
         ("dangle-model,m", po::value<int>()->default_value(1), "Dangle model")
         ("num-threads,t", po::value<int>()->default_value(0), "Number of threads")
+        ("b-parameter,b", po::value<std::string>()->default_value(""), "B Parameter")
         ("help,h", "Display this help message")
         ;
 
@@ -61,11 +62,15 @@ int main(int argc, char * argv[]) {
     // Set up dangle model
     pmfe::dangle_mode dangles = pmfe::convert_to_dangle_mode(vm["dangle-model"].as<int>());
 
-    // Set up sequence
+    //Set up sequence
     fs::path seq_file (vm["sequence"].as<std::string>());
     pmfe::RNASequence sequence(seq_file);
 
-    pmfe::RNAPolytope poly(sequence, dangles, pmfe::Rational("0"));
+    std::string bParam = vm["b-parameter"].as<std::string>();
+    pmfe::RNAPolytope poly = (bParam != "") ? 
+        pmfe::RNAPolytope(sequence, dangles, pmfe::Rational(bParam)) : 
+        pmfe::RNAPolytope(sequence, dangles);
+    
     poly.build();
 
     poly.print_statistics();

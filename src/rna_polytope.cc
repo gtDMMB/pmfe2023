@@ -86,7 +86,7 @@ namespace pmfe {
         BBP::FPoint result = scored_structure_to_fp(scored_structure);
 
         if(scale_b_param){
-            result = remove_b_param(result);
+            result = remove_b_param(result, params);
         }
 
         // TODO: Handle storing stuctures in class after conversion to dD_triangulation
@@ -116,11 +116,12 @@ namespace pmfe {
         }
     };
 
-    BBP::FPoint RNAPolytope::remove_b_param(BBP::FPoint point){
+    BBP::FPoint RNAPolytope::remove_b_param(BBP::FPoint point, ParameterVector p){
+        Rational scale = p.dummy_scaling != 0 ? p.dummy_scaling : 1;
         BBP::FPoint out(
             point.homogeneous(0), 
             point.homogeneous(2), 
-            point.homogeneous(3)+(point.homogeneous(1)*multiloop_weight), 
+            point.homogeneous(3)+((point.homogeneous(1) * multiloop_weight) / scale), 
             1
             );
         return out;

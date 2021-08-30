@@ -50,7 +50,7 @@ namespace pmfe {
 
         BBP::FPoint vertex_oracle(BBP::FVector objective);
         void write_to_file(const fs::path poly_file) const;
-        BBP::FPoint remove_b_param(BBP::FPoint point);
+        BBP::FPoint remove_b_param(BBP::FPoint point, ParameterVector vec);
 
     protected:
         void hook_preinit();

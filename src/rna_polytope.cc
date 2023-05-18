@@ -37,7 +37,7 @@ namespace pmfe {
     ParameterVector fv_to_pv(BBP::FVector v, Rational multi) {
         ParameterVector pv(
             mpq_class(v.cartesian(0).mpq()),
-            multi,
+            multi * mpq_class(v.cartesian(2).mpq()),
             mpq_class(v.cartesian(1).mpq()),
             mpq_class(v.cartesian(2).mpq())
             );
@@ -117,11 +117,10 @@ namespace pmfe {
     };
 
     BBP::FPoint RNAPolytope::remove_b_param(BBP::FPoint point, ParameterVector p){
-        Rational scale = p.dummy_scaling != 0 ? p.dummy_scaling : 1;
         BBP::FPoint out(
             point.homogeneous(0), 
             point.homogeneous(2), 
-            point.homogeneous(3)+((point.homogeneous(1) * multiloop_weight) / scale), 
+            point.homogeneous(3)+((point.homogeneous(1) * multiloop_weight)), 
             1
             );
         return out;

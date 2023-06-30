@@ -82,7 +82,7 @@ namespace pmfe {
 
     class Turner99: public NNDBConstants {
     public:
-        Turner99(const ParameterVector& params = ParameterVector(), const fs::path& param_dir = "Turner99");
+        Turner99(const ParameterVector& params = ParameterVector(), const fs::path& param_dir = fs::path(PMFE_PATH) / "Turner99");
 
     protected:
         void initMiscValues(const fs::path& param_dir);

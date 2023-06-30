@@ -1,11 +1,11 @@
 # source files
-SRC := $(wildcard src/*.cc)
+SRC := $(wildcard $(CURDIR)/src/*.cc)
 OBJ := $(SRC:.cc=.o)
 
-BINSRC := $(wildcard src/bin-*.cc)
+BINSRC := $(wildcard $(CURDIR)/src/bin-*.cc)
 BINOBJ := $(BINSRC:.cc=.o)
 
-TESTSRC := $(wildcard src/test-*.cc)
+TESTSRC := $(wildcard $(CURDIR)/src/test-*.cc)
 TESTOBJ := $(TESTSRC:.cc=.o)
 
 LIBOBJ := $(OBJ)
@@ -16,8 +16,8 @@ DEP := $(SRC:.cc=.P)
 HDR := $(wildcard src/*.h)
 
 # include directories
-INCLUDES += -Iinclude
-INCLUDES += -IiB4e
+INCLUDES += -I$(CURDIR)/include
+INCLUDES += -I$(CURDIR)/iB4e
 INCLUDES += -I/usr/local/include # For Homebrew
 
 # C++ compiler flags
@@ -38,6 +38,9 @@ LIBS += -lboost_program_options
 LIBS += -lboost_system
 LIBS += -lboost_log
 
+#compile-time variables
+VARS += -DPMFE_PATH='"$(CURDIR)"'
+
 BIN = pmfe-findmfe pmfe-scorer pmfe-parametrizer pmfe-subopt pmfe-tests
 all: $(OBJ) $(BIN)
 
@@ -47,22 +50,22 @@ debug: CXXFLAGS += -Og
 debug: all
 
 pmfe-findmfe: $(LIBOBJ) src/bin-findmfe.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 pmfe-scorer: $(LIBOBJ) src/bin-scorer.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 pmfe-parametrizer: $(LIBOBJ) src/bin-parametrizer.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 pmfe-subopt: $(LIBOBJ) src/bin-subopt.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 pmfe-tests: $(LIBOBJ) $(TESTOBJ) src/bin-tests.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ $(LIBS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 %.o: %.cc
-	$(CXX) -MD $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
+	$(CXX) -MD $(CXXFLAGS) $(INCLUDES) $(VARS) -o $@ -c $<
 	@cp $*.d $*.P; \
         sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
             -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \

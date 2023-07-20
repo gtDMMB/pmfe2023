@@ -14,6 +14,10 @@ It relies on an implementation of Zucker's dynamic-programming algorithm for RNA
 This project is available as a [Docker][docker] container.
 If you wish to *run* `pmfe` but do not need to modify and recompile the code, we recommend this approach, as it makes it easy to ensure you have all the dependencies.
 
+Note that the image is no longer being updated and corresponds to latest code as of September 2015.
+As of June 2018, the only updates have been to the test suite.
+Therefore, the Docker container remains a good choice for users who only need to generate polytopes from RNA sequences.
+
 You can download the latest image by running the following in your shell:
 
     docker pull agdphd/pmfe
@@ -123,6 +127,6 @@ The source for pmfe is released under the GNU General Public License as publishe
 [boost]: //www.boost.org
 [boost-getstarted]: //www.boost.org/doc/libs/1_57_0/more/getting_started/unix-variants.html
 [cmake]: //www.cmake.org/download/
-[gtfold]: //gtfold.sourceforge.net/
+[gtfold]: http://gtfold.sourceforge.net/
 [docker]: //docker.io/
 [catch]: //github.com/philsquared/Catch

@@ -22,6 +22,7 @@
 namespace fs = boost::filesystem;
 
 namespace pmfe {
+    //For complete polytope
     ParameterVector fv_to_pv(BBP::FVector v) {
         ParameterVector pv (
             mpq_class(v.cartesian(0).mpq()),
@@ -32,21 +33,48 @@ namespace pmfe {
         return pv;
     };
 
+    //For b-slice
+    ParameterVector fv_to_pv(BBP::FVector v, Rational multi) {
+        ParameterVector pv(
+            mpq_class(v.cartesian(0).mpq()),
+            multi * mpq_class(v.cartesian(2).mpq()),
+            mpq_class(v.cartesian(1).mpq()),
+            mpq_class(v.cartesian(2).mpq())
+            );
+        return pv;
+    }
+
     BBP::FPoint scored_structure_to_fp(RNAStructureWithScore structure) {
         std::vector<Rational> values = {structure.score.multiloops, structure.score.unpaired, structure.score.branches, structure.score.w};
         BBP::FPoint result(4, values.begin(), values.end());
         return result;
     };
-
+    
+    //Constructor for full 4D calculation
     RNAPolytope::RNAPolytope(RNASequence sequence, pmfe::dangle_mode dangles):
         BBPolytope(4),
         sequence(sequence),
-        dangles(dangles)
+        dangles(dangles),
+        scale_b_param(false)
+        {};
+
+    //Constructor for b-slice
+    RNAPolytope::RNAPolytope(RNASequence sequence, pmfe::dangle_mode dangles, Rational m_weight):
+        BBPolytope(3),
+        sequence(sequence),
+        dangles(dangles),
+        multiloop_weight(m_weight),
+        scale_b_param(true)
         {};
 
     BBP::FPoint RNAPolytope::vertex_oracle(FVector objective) {
         // Set up the computational environment
-        ParameterVector params = fv_to_pv(objective);
+        ParameterVector params;
+        if(scale_b_param){
+            params = fv_to_pv(objective, multiloop_weight);
+        }else{
+            params = fv_to_pv(objective);
+        }
         Turner99 constants(params);
         NNTM energy_model(constants, dangles);
 
@@ -56,6 +84,10 @@ namespace pmfe {
         // Find the MFE structure
         RNAStructureWithScore scored_structure = energy_model.mfe_structure(seq_annotated);
         BBP::FPoint result = scored_structure_to_fp(scored_structure);
+
+        if(scale_b_param){
+            result = remove_b_param(result, params);
+        }
 
         // TODO: Handle storing stuctures in class after conversion to dD_triangulation
         structures.insert(std::make_pair(result, scored_structure));
@@ -83,6 +115,16 @@ namespace pmfe {
             outfile << i << "\t" << structures.at(associated_point(v)) << std::endl;
         }
     };
+
+    BBP::FPoint RNAPolytope::remove_b_param(BBP::FPoint point, ParameterVector p){
+        BBP::FPoint out(
+            point.homogeneous(0), 
+            point.homogeneous(2), 
+            point.homogeneous(3)+((point.homogeneous(1) * multiloop_weight)), 
+            1
+            );
+        return out;
+    }
 
     void RNAPolytope::hook_preinit() {
         BOOST_LOG_TRIVIAL(info) << "Initializing polytope.";

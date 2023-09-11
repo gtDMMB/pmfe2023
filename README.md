@@ -99,6 +99,8 @@ To use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fasta`, type
 
 The result will be saved in `test_seq/tRNA/c.diphtheriae_tRNA.rnapoly`, which can be read directly or used with `rna_poly.py` to produce a Sage polytope for further investigation.
 
+To calculate one b-slice of the polytope use the -b tag with a string to represent the value of the b parameter. i.e. `-b 1/3`
+
 ### `pmfe-tests`
 The `pmfe-tests` program runs a suite of unit tests.
 

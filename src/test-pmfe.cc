@@ -13,7 +13,7 @@ namespace fs = boost::filesystem;
 
 TEST_CASE("A. tabira 5S MFE", "[mfe][biological][atabira][5S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/5S/a.tabira_5S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/5S/a.tabira_5S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -38,7 +38,7 @@ TEST_CASE("A. tabira 5S MFE", "[mfe][biological][atabira][5S]") {
 
 TEST_CASE("C. diphtheriae tRNA MFE", "[mfe][biological][cdiphtheriae][tRNA]") {
     // Load the sequence
-    fs::path seqfile("test_seq/tRNA/c.diphtheriae_tRNA.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/tRNA/c.diphtheriae_tRNA.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -63,7 +63,7 @@ TEST_CASE("C. diphtheriae tRNA MFE", "[mfe][biological][cdiphtheriae][tRNA]") {
 
 TEST_CASE("D. mobilis 5S MFE", "[mfe][biological][dmobilis][5S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/5S/d.mobilis_5S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/5S/d.mobilis_5S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -88,7 +88,7 @@ TEST_CASE("D. mobilis 5S MFE", "[mfe][biological][dmobilis][5S]") {
 
 TEST_CASE("E. coli 5S MFE", "[mfe][biological][ecoli][5S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/5S/e.coli_5S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/5S/e.coli_5S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -113,7 +113,7 @@ TEST_CASE("E. coli 5S MFE", "[mfe][biological][ecoli][5S]") {
 
 TEST_CASE("G. arboreum 5S MFE", "[mfe][biological][garboreum][5S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/5S/g.arboreum_5S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/5S/g.arboreum_5S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -138,7 +138,7 @@ TEST_CASE("G. arboreum 5S MFE", "[mfe][biological][garboreum][5S]") {
 
 TEST_CASE("H. sapiens tRNA MFE", "[mfe][biological][hsapiens][tRNA]") {
     // Load the sequence
-    fs::path seqfile("test_seq/tRNA/h.sapiens_tRNA.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/tRNA/h.sapiens_tRNA.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -163,7 +163,7 @@ TEST_CASE("H. sapiens tRNA MFE", "[mfe][biological][hsapiens][tRNA]") {
 
 TEST_CASE("L. delbrueckii tRNA MFE", "[mfe][biological][ldelbrueckii][tRNA]") {
     // Load the sequence
-    fs::path seqfile("test_seq/tRNA/l.delbrueckii_tRNA.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/tRNA/l.delbrueckii_tRNA.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -188,7 +188,7 @@ TEST_CASE("L. delbrueckii tRNA MFE", "[mfe][biological][ldelbrueckii][tRNA]") {
 
 TEST_CASE("O. nivara tRNA MFE", "[mfe][biological][onivara][tRNA]") {
     // Load the sequence
-    fs::path seqfile("test_seq/tRNA/o.nivara_tRNA.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/tRNA/o.nivara_tRNA.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -213,7 +213,7 @@ TEST_CASE("O. nivara tRNA MFE", "[mfe][biological][onivara][tRNA]") {
 
 TEST_CASE("R. norvegicus 5S MFE", "[mfe][biological][rnorvegicus][5S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/5S/r.norvegicus_5S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/5S/r.norvegicus_5S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -238,7 +238,7 @@ TEST_CASE("R. norvegicus 5S MFE", "[mfe][biological][rnorvegicus][5S]") {
 
 TEST_CASE("S. tokodaii tRNA MFE", "[mfe][biological][stokodaii][tRNA]") {
     // Load the sequence
-    fs::path seqfile("test_seq/tRNA/s.tokodaii_tRNA.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/tRNA/s.tokodaii_tRNA.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -263,7 +263,7 @@ TEST_CASE("S. tokodaii tRNA MFE", "[mfe][biological][stokodaii][tRNA]") {
 
 TEST_CASE("A. suum 16S MFE", "[mfe][biological][asuum][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/a.suum_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/a.suum_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -288,7 +288,7 @@ TEST_CASE("A. suum 16S MFE", "[mfe][biological][asuum][16S]") {
 
 TEST_CASE("B. bigemina 16S MFE", "[mfe][biological][bbigemina][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/b.bigemina_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/b.bigemina_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -313,7 +313,7 @@ TEST_CASE("B. bigemina 16S MFE", "[mfe][biological][bbigemina][16S]") {
 
 TEST_CASE("C. elegans 16S MFE", "[mfe][biological][celegans][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/c.elegans_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/c.elegans_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -338,7 +338,7 @@ TEST_CASE("C. elegans 16S MFE", "[mfe][biological][celegans][16S]") {
 
 TEST_CASE("E. cuniculu 16S MFE", "[mfe][biological][ecuniculi][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/e.cuniculi_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/e.cuniculi_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -363,7 +363,7 @@ TEST_CASE("E. cuniculu 16S MFE", "[mfe][biological][ecuniculi][16S]") {
 
 TEST_CASE("E. hexamita 16S MFE", "[mfe][biological][ehexamita][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/e.hexamita_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/e.hexamita_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -388,7 +388,7 @@ TEST_CASE("E. hexamita 16S MFE", "[mfe][biological][ehexamita][16S]") {
 
 TEST_CASE("G. ardaea 16S MFE", "[mfe][biological][gardaea][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/g.ardaea_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/g.ardaea_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -413,7 +413,7 @@ TEST_CASE("G. ardaea 16S MFE", "[mfe][biological][gardaea][16S]") {
 
 TEST_CASE("G. intestinalis 16S MFE", "[mfe][biological][gintestinalis][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/g.intestinalis_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/g.intestinalis_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -438,7 +438,7 @@ TEST_CASE("G. intestinalis 16S MFE", "[mfe][biological][gintestinalis][16S]") {
 
 TEST_CASE("G. muris 16S MFE", "[mfe][biological][gmuris][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/g.muris_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/g.muris_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -463,7 +463,7 @@ TEST_CASE("G. muris 16S MFE", "[mfe][biological][gmuris][16S]") {
 
 TEST_CASE("H. volcanii 16S MFE", "[mfe][biological][hvolcanii][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/h.volcanii_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/h.volcanii_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -488,7 +488,7 @@ TEST_CASE("H. volcanii 16S MFE", "[mfe][biological][hvolcanii][16S]") {
 
 TEST_CASE("V. necatrix 16S MFE", "[mfe][biological][vnecatrix][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/v.necatrix_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/v.necatrix_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -513,7 +513,7 @@ TEST_CASE("V. necatrix 16S MFE", "[mfe][biological][vnecatrix][16S]") {
 
 TEST_CASE("Z. mays 16S MFE", "[mfe][biological][zmays][16S]") {
     // Load the sequence
-    fs::path seqfile("test_seq/16S/z.mays_16S.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/16S/z.mays_16S.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -538,7 +538,7 @@ TEST_CASE("Z. mays 16S MFE", "[mfe][biological][zmays][16S]") {
 
 TEST_CASE("Combinatorial sequence MFE", "[mfe][synthetic][combinatorial]") {
     // Load the sequence
-    fs::path seqfile("test_seq/synthetic/test_combinatorial.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/synthetic/test_combinatorial.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks
@@ -563,7 +563,7 @@ TEST_CASE("Combinatorial sequence MFE", "[mfe][synthetic][combinatorial]") {
 
 TEST_CASE("Randomly generated sequence MFE", "[mfe][synthetic][random]") {
     // Load the sequence
-    fs::path seqfile("test_seq/synthetic/test_random.fasta");
+    fs::path seqfile = fs::path(PMFE_PATH) / "test_seq/synthetic/test_random.fasta";
     pmfe::RNASequence seq(seqfile);
 
     // Some basic sanity checks

@@ -102,7 +102,7 @@ namespace pmfe {
         seq.FM[i][j] = *std::min_element(fm_vals.begin(), fm_vals.end());
     }
 
-    std::vector<RNAStructureWithScore> NNTM::suboptimal_structures(RNASequenceWithTables& seq, Rational delta, bool sorted) const {
+    std::vector<RNAStructureWithScore> NNTM::suboptimal_structures(RNASequenceWithTables& seq, Rational delta, bool sorted, bool transform) const {
         // Ensure tables are available
         if (not seq.subopt_tables_populated) {
             populate_subopt_tables(seq);
@@ -131,6 +131,8 @@ namespace pmfe {
                 RNAStructure structure = ps;
                 ScoreVector score = this->score(structure);
                 RNAStructureWithScore result(structure, score);
+                // Set transfromed value for saving.
+                result.transformed = transform;
 
                 if (ps.total() != score.energy) {
                     BOOST_LOG_TRIVIAL(error) << "Inconsistent subopt energy: " << ps.total().get_d() << " ≅ " << score.energy.get_d();

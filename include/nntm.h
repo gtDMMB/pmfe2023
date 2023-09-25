@@ -22,7 +22,7 @@ namespace pmfe{
 
         ScoreVector score(const RNAStructure& structure, bool compute_w = true) const;
 
-        std::vector<RNAStructureWithScore> suboptimal_structures(RNASequenceWithTables& seq, Rational delta, bool sorted = false) const;
+        std::vector<RNAStructureWithScore> suboptimal_structures(RNASequenceWithTables& seq, Rational delta, bool sorted = false, bool transformed = false) const;
 
     protected:
         // MFE helpers

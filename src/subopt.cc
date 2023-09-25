@@ -11,12 +11,12 @@
 namespace fs = boost::filesystem;
 
 namespace pmfe {
-    std::vector<RNAStructureWithScore> suboptimal_structures(const fs::path seq_file, const ParameterVector& params, const dangle_mode& dangles, const Rational& delta, bool sorted) {
+    std::vector<RNAStructureWithScore> suboptimal_structures(const fs::path seq_file, const ParameterVector& params, const dangle_mode& dangles, const Rational& delta, bool sorted, bool transform) {
         Turner99 constants(params);
         RNASequence seq(seq_file);
         NNTM energy_model(constants, dangles);
         RNASequenceWithTables seq_annotated = energy_model.energy_tables(seq);
-        std::vector<RNAStructureWithScore> results = energy_model.suboptimal_structures(seq_annotated, delta, sorted);
+        std::vector<RNAStructureWithScore> results = energy_model.suboptimal_structures(seq_annotated, delta, sorted, transform);
         return results;
     }
 }

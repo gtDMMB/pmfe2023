@@ -159,6 +159,14 @@ namespace pmfe {
         return result;
     };
 
+    void ParameterVector::untransform_params() {
+        this->multiloop_penalty = (this->multiloop_penalty - 3*this->branch_penalty);
+    };
+
+    void ParameterVector::transform_params() {
+        this->multiloop_penalty = (this->multiloop_penalty + 3*this->branch_penalty);
+    };
+
     RNASequence::RNASequence(const std::string& seq):
         seq_txt(seq)
     {
@@ -427,15 +435,34 @@ namespace pmfe {
 
     RNAStructureWithScore::RNAStructureWithScore(const RNAStructure& structure, const ScoreVector& score):
         RNAStructure(structure), score(score) {};
+    
+    RNAStructureWithScore::RNAStructureWithScore(const RNAStructure& structure, const ScoreVector& score, bool transformed):
+        RNAStructure(structure), score(score), transformed(transformed) {};
 
     std::ostream& operator<<(std::ostream& os, const RNAStructureWithScore& structure) {
-        os << structure.structure_as_chars << "\t"
-           << structure.score.multiloops << "\t"
-           << structure.score.unpaired << "\t"
-           << structure.score.branches << "\t"
-           << structure.score.w << "\t"
-           << structure.score.energy;
+        os << structure.structure_as_chars << "\t";
+        
+        if (structure.transformed) {
+            ScoreVector newScore = structure.transformedScore();
+            os << newScore.multiloops << "\t"
+            << newScore.unpaired << "\t"
+            << newScore.branches << "\t"
+            << newScore.w << "\t"; 
+            
+        } else {
+            os << structure.score.multiloops << "\t"
+            << structure.score.unpaired << "\t"
+            << structure.score.branches << "\t"
+            << structure.score.w << "\t";
+        }
+           
+        os << structure.score.energy;
+
         return os;
+    }
+
+    ScoreVector RNAStructureWithScore::transformedScore () const { 
+        return ScoreVector(this->score.multiloops, this->score.unpaired, this->score.branches - 3 * this->score.multiloops, this->score.w);
     }
 
     bool operator<(const RNAStructureWithScore& lhs, const RNAStructureWithScore& rhs) {

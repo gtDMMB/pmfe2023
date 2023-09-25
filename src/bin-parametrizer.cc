@@ -49,7 +49,7 @@ int main(int argc, char * argv[]) {
     size_t num_threads = (vm["num-threads"].as<int>());
     omp_set_num_threads(num_threads);
 
-        // Process logging-related options
+    // Process logging-related options
     bool verbose = vm["verbose"].as<bool>();
     if (verbose) {
         boost::log::core::get()->set_filter(

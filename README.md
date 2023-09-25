@@ -91,6 +91,9 @@ To use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fasta` with param
 
 The result will be saved in `test_seq/tRNA/c.diphtheriae_tRNA.rnasubopt`.
 
+### `Transformation`
+Both pmfe and subopt also have options to operate in the transformed space defined by the transformation $(x, y, z, w) \rightarrow (x, y, z-3x, w)$. The option `-I` tells pmfe that the input parameters come from the transformed space. The option `-O`  tells pmfe the output should be in the transformed space. Using them both means both input and output should be in the transformed space. 
+
 ### `pmfe-parametrizer`
 Given a FASTA file representing an RNA sequence, the `pmfe-parametrizer` program will generate the polytope which is the convex hull of all secondary structures on that sequence in ℚ⁴.
 To use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fasta`, type

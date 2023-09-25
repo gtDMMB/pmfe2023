@@ -35,6 +35,8 @@ int main(int argc, char* argv[]) {
         ("dangle-model,m", po::value<int>()->default_value(1), "Dangle model")
         ("sorted,s", po::bool_switch(), "Sort results in increasing energy order")
         ("num-threads,t", po::value<int>()->default_value(0), "Number of threads")
+        ("transformed-input,I", po::bool_switch()->default_value(false), "Input a, b, c, d is transformed")
+        ("transform-output,O", po::bool_switch()->default_value(false), "Transform structure output")
         ("help,h", "Display this help message")
         ;
 
@@ -95,15 +97,21 @@ int main(int argc, char* argv[]) {
         params.dummy_scaling = pmfe::get_rational_from_word(vm["dummy-scaling"].as<std::string>());
     };
 
+    if (vm["transformed-input"].as<bool>()) {
+        params.untransform_params();
+    };
+
     params.canonicalize();
 
     bool sorted = vm["sorted"].as<bool>();
+    bool transform = vm["transform-output"].as<bool>();
 
     // Set up dangle model
     pmfe::dangle_mode dangles = pmfe::convert_to_dangle_mode(vm["dangle-model"].as<int>());
 
     // Get results
-    std::vector<pmfe::RNAStructureWithScore> structures = suboptimal_structures(seq_file, params, dangles, delta, sorted);
+    
+    std::vector<pmfe::RNAStructureWithScore> structures = suboptimal_structures(seq_file, params, dangles, delta, sorted, transform);
 
     // Print some status information
     std::cout << "Found " << structures.size() << " suboptimal structures." << std::endl;
@@ -116,6 +124,11 @@ int main(int argc, char* argv[]) {
         error_message << "Output file " << out_file << "is invalid.";
         throw std::invalid_argument(error_message.str());
     }
+
+    // If input was transformed, transform back
+    if (vm["transformed-input"].as<bool>()) {
+        params.transform_params();
+    };
 
     outfile << "#\tSuboptimal secondary structures within " << delta.get_d() << " of minimum energy." << std::endl;
     outfile << "#\tCoefficients:\t" <<

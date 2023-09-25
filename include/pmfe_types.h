@@ -47,16 +47,18 @@ namespace pmfe {
 
     class ParameterVector {
     public:
-    ParameterVector(Rational multiloop_penalty = multiloop_default, Rational unpaired_penalty = unpaired_default, Rational branch_penalty = branch_default, Rational dummy_scaling = dummy_default) :
-        multiloop_penalty(multiloop_penalty),
+    
+
+    ParameterVector(Rational multiloop_penalty = multiloop_default, Rational unpaired_penalty = unpaired_default, Rational branch_penalty = branch_default, Rational dummy_scaling = dummy_default) : 
+            multiloop_penalty(multiloop_penalty),
             unpaired_penalty(unpaired_penalty),
             branch_penalty(branch_penalty),
-            dummy_scaling(dummy_scaling)
-            {
-            this->canonicalize();
+            dummy_scaling(dummy_scaling) 
+        {
+            this->canonicalize();  
         };
-        Rational multiloop_penalty, unpaired_penalty, branch_penalty, dummy_scaling;
 
+        Rational multiloop_penalty, unpaired_penalty, branch_penalty, dummy_scaling;
 
         void canonicalize() {
             multiloop_penalty.canonicalize();
@@ -70,7 +72,12 @@ namespace pmfe {
         friend std::ostream& operator<<(std::ostream& os, const ParameterVector& params);
         friend bool operator==(const ParameterVector& a, const ParameterVector& b);
         friend bool operator!=(const ParameterVector& a, const ParameterVector& b);
+
+        void untransform_params();
+        void transform_params();
     };
+
+    
 
     class ScoreVector {
     public:
@@ -188,12 +195,17 @@ Representation of an RNA secondary structure that has been assigned a score
         **/
     public:
         ScoreVector score;
+        bool transformed = false; // If true ostream outputs score vector with transformation T(x, y, z, w) = (x, w, z - 3*x, w)
 
         RNAStructureWithScore() {}; // Default constructor for compiler
         RNAStructureWithScore(const RNAStructure& structure, const ScoreVector& score);
+        RNAStructureWithScore(const RNAStructure& structure, const ScoreVector& score, bool transfomed);
+
         friend std::ostream& operator<<(std::ostream& out, const RNAStructureWithScore& structure); // Output this structure and its scores as an ostream
 
         friend bool operator<(const RNAStructureWithScore& lhs, const RNAStructureWithScore& rhs);
+    
+        ScoreVector transformedScore() const; // Transform score vector with transformation T(x, y, z, w) = (x, w, z - 3*x, w)
     };
 
     class RNAStructureTree: public RNAStructure {

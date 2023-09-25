@@ -2,6 +2,7 @@
 
 #include "mfe.h"
 #include "pmfe_types.h"
+#include "rational.h"
 
 #include <iostream>
 #include <omp.h>
@@ -30,6 +31,8 @@ int main(int argc, char * argv[]) {
         ("dummy-scaling,d", po::value<std::string>(), "Dummy scaling parameter")
         ("dangle-model,m", po::value<int>()->default_value(1), "Dangle model")
         ("num-threads,t", po::value<int>()->default_value(0), "Number of threads")
+        ("transform-input,I", po::bool_switch()->default_value(false), "Input a, b, c, d is transformed")
+        ("transform-output,O", po::bool_switch()->default_value(false), "Transform structure output")
         ("help,h", "Display this help message")
         ;
 
@@ -62,7 +65,7 @@ int main(int argc, char * argv[]) {
     // Process file-related options
     fs::path seq_file(vm["sequence"].as<std::string>());
 
-    // Set up the parameter vector
+    // Set up the parameter vector 
     pmfe::ParameterVector params = pmfe::ParameterVector();
 
     if (vm.count("multiloop-penalty")) {
@@ -81,12 +84,20 @@ int main(int argc, char * argv[]) {
         params.dummy_scaling = pmfe::get_rational_from_word(vm["dummy-scaling"].as<std::string>());
     };
 
+    // Check if input is transformed
+    if (vm["transform-input"].as<bool>()) {
+        params.untransform_params();
+    };
+
     params.canonicalize();
 
     // Setup dangle model
     pmfe::dangle_mode dangles = pmfe::convert_to_dangle_mode(vm["dangle-model"].as<int>());
 
     pmfe::RNAStructureWithScore result = pmfe::mfe(seq_file, params, dangles);
+
+    result.transformed = vm["transform-output"].as<bool>();;
+
     std::cout << result << std::endl;
     return(0);
 }

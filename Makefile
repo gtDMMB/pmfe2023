@@ -41,7 +41,7 @@ LIBS += -lboost_log
 #compile-time variables
 VARS += -DPMFE_PATH='"$(CURDIR)"'
 
-BIN = pmfe-findmfe pmfe-scorer pmfe-parametrizer pmfe-subopt pmfe-tests
+BIN = pmfe-findmfe pmfe-scorer pmfe-parametrizer pmfe-subopt pmfe-tests pmfe-findmfe-rectangle
 all: $(OBJ) $(BIN)
 
 -include $(DEP)
@@ -50,6 +50,9 @@ debug: CXXFLAGS += -Og
 debug: all
 
 pmfe-findmfe: $(LIBOBJ) src/bin-findmfe.o
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
+
+pmfe-findmfe-rectangle: $(LIBOBJ) src/bin-findmfe-rectangle.o
 	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(VARS) $^ -o $@ $(LIBS)
 
 pmfe-scorer: $(LIBOBJ) src/bin-scorer.o

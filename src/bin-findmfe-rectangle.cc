@@ -7,6 +7,7 @@
 #include <iostream>
 #include <omp.h>
 #include <string>
+#include <unordered_set>
 
 #include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
@@ -24,6 +25,7 @@ int main(int argc, char * argv[]) {
     po::options_description desc("Options");
     desc.add_options()
         ("sequence", po::value<std::string>()->required(), "Sequence file")
+        ("outfile,o", po::value<std::string>(), "Output file")
         ("verbose,v", po::bool_switch()->default_value(false), "Write verbose debugging output")
         ("multiloop-penalty-min,a", po::value<std::string>()->required(), "Multiloop penalty parameter min")
         ("multiloop-penalty-max,A", po::value<std::string>()->required(), "Multiloop penalty parameter max")
@@ -94,6 +96,8 @@ int main(int argc, char * argv[]) {
     // float C_loc = C.to_double();
     pmfe::Rational temp_c = c;
     pmfe::RNAStructureWithScore result = pmfe::mfe(seq_file, params, dangles);
+    std::unordered_set<std::string> structure_set;
+    pmfe::RNAStructureWithScore prev_result = result;
     while (a <= A) {
         temp_c = c;
         while(temp_c <= C) {    
@@ -110,11 +114,13 @@ int main(int argc, char * argv[]) {
             params.canonicalize();
 
             result = pmfe::mfe(seq_file, params, dangles);
-
-            result.transformed = vm["transform-output"].as<bool>();;
-
-            std::cout << params << ":" << result << std::endl;
+            result.transformed = vm["transform-output"].as<bool>();
             
+            // Print strucure for params if it hasn't already been found
+            if (structure_set.emplace(result.string()).second) {
+                std::cout << result << std::endl;
+            }
+
             temp_c += step_size;
         }
         a += step_size;

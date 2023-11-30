@@ -83,6 +83,14 @@ For example, to use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fast
 
 The result will be printed to your terminal.
 
+### 'pmfe-findmfe-rectangle`
+Given a FASTA file representing an RNA sequence and a range of values for the Turner99 multibranch loop parameters, the `pmfe-findmfe` program will search a a grid determined by an (optionally) given step size, and return the unique secondary structures optimal on that grid.
+For example, to use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fasta` with parameters `A`, `B`, `C`, and `D`, and step size S type
+
+    pmfe-findmfe-rectangle test_seq/tRNA/c.diphtheriae_tRNA.fasta -a a -A A -c c -C C -s S
+
+The result will be printed to your terminal.
+
 ### `pmfe-subopt`
 Given a FASTA file representing an RNA sequence, an energy gap δ, and (optionally) some modified values for the Turner99 multibranch loop parameters, the `pmfe-subopt` program will generate all secondary structures with energy within δ of the minimum.
 To use it on the sequence in `test_seq/tRNA/c.diphtheriae_tRNA.fasta` with parameters `A`, `B`, `C`, and `D` and energy gap δ, type

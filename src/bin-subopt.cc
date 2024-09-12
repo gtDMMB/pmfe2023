@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
         ("sequence", po::value<std::string>()->required(), "Sequence file")
         ("verbose,v", po::bool_switch()->default_value(false), "Write verbose debugging output")
         ("outfile,o", po::value<std::string>(), "Output file")
+        ("consoleout,C", po::bool_switch()->default_value(false), "Output to console")
         ("delta", po::value<std::string>()->default_value("0"), "Energy delta value")
         ("multiloop-penalty,a", po::value<std::string>(), "Multiloop penalty parameter")
         ("unpaired-penalty,b", po::value<std::string>(), "Unpaired base penalty parameter")
@@ -116,31 +117,39 @@ int main(int argc, char* argv[]) {
     // Print some status information
     std::cout << "Found " << structures.size() << " suboptimal structures." << std::endl;
 
-    // Write out suboptimal structures
-    fs::ofstream outfile(out_file);
-
-    if (!outfile.is_open()) {
-        std::stringstream error_message;
-        error_message << "Output file " << out_file << "is invalid.";
-        throw std::invalid_argument(error_message.str());
-    }
-
     // If input was transformed, transform back
     if (vm["transformed-input"].as<bool>()) {
         params.transform_params();
     };
 
-    outfile << "#\tSuboptimal secondary structures within " << delta.get_d() << " of minimum energy." << std::endl;
-    outfile << "#\tCoefficients:\t" <<
+    std::stringstream outbuffer;
+        
+    outbuffer << "#\tSuboptimal secondary structures within " << delta.get_d() << " of minimum energy." << std::endl;
+    outbuffer << "#\tCoefficients:\t" <<
         "a = " << params.multiloop_penalty << " ≈ " << params.multiloop_penalty.get_d() << ",\t" <<
         "b = " << params.unpaired_penalty << " ≈ " << params.unpaired_penalty.get_d() << ",\t" <<
         "c = " << params.branch_penalty << " ≈ " << params.branch_penalty.get_d() << ",\t" <<
         "d = " << params.dummy_scaling << " ≈ " << params.dummy_scaling.get_d() << "." << std::endl;
 
     pmfe::RNASequence seq(seq_file);
-    outfile << "#\t" << seq << "\tM\tU\tB\tw\tEnergy" << std::endl << std::endl;
+    outbuffer << "#\t" << seq << "\tM\tU\tB\tw\tEnergy" << std::endl << std::endl;
 
     for (unsigned int i = 0; i < structures.size(); ++i) {
-        outfile << i << "\t" << structures[i] << "\t≅ " << structures[i].score.energy.get_d() << std::endl;
+        outbuffer << i << "\t" << structures[i] << "\t≅ " << structures[i].score.energy.get_d() << std::endl;
+    }
+
+    if (vm["consoleout"].as<bool>()) {
+        std::cout << outbuffer.str();
+    } else {
+        // Write out suboptimal structures
+        fs::ofstream outfile(out_file);
+
+        if (!outfile.is_open()) {
+            std::stringstream error_message;
+            error_message << "Output file " << out_file << "is invalid.";
+            throw std::invalid_argument(error_message.str());
+        }
+
+        outfile << outbuffer.str();
     }
 }

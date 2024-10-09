@@ -38,6 +38,7 @@ int main(int argc, char * argv[]) {
         ("num-threads,t", po::value<int>()->default_value(0), "Number of threads")
         ("transform-input,I", po::bool_switch()->default_value(false), "Input a, b, c, d is transformed")
         ("transform-output,O", po::bool_switch()->default_value(false), "Transform structure output")
+        ("parameter-output,P", po::bool_switch()->default_value(false), "Output parameters where each Structure is found")
         ("help,h", "Display this help message")
         ;
 
@@ -76,6 +77,24 @@ int main(int argc, char * argv[]) {
     // Process file-related options
     fs::path seq_file(vm["sequence"].as<std::string>());
 
+    //Process Outfile
+    fs::path out_file;
+
+    if (vm.count("outfile")) {
+        out_file = fs::path(vm["outfile"].as<std::string>());
+    } else {
+        out_file = seq_file;
+        out_file.replace_extension(".rnarect");
+    }
+
+    fs::ofstream outfile;
+
+    if (vm["parameter-output"].as<bool>()){
+        // Write out structure with params
+        outfile.open(out_file);
+    }
+
+
     // Set up the parameters to run findmfe     
     pmfe::Rational a = pmfe::get_rational_from_word(vm["multiloop-penalty-min"].as<std::string>());
     pmfe::Rational A = pmfe::get_rational_from_word(vm["multiloop-penalty-max"].as<std::string>());
@@ -98,6 +117,7 @@ int main(int argc, char * argv[]) {
     pmfe::RNAStructureWithScore result = pmfe::mfe(seq_file, params, dangles);
     std::unordered_set<std::string> structure_set;
     pmfe::RNAStructureWithScore prev_result = result;
+
     while (a <= A) {
         temp_c = c;
         while(temp_c <= C) {    
@@ -120,12 +140,26 @@ int main(int argc, char * argv[]) {
             if (structure_set.emplace(result.string()).second) {
                 std::cout << result << std::endl;
             }
+            
+            if (vm["parameter-output"].as<bool>()){
+                // Write out structure with params
+                // fs::ofstream outfile(out_file);
+
+                if (!outfile.is_open()) {
+                    std::stringstream error_message;
+                    error_message << "Output file " << out_file << "is invalid.";
+                    throw std::invalid_argument(error_message.str());
+                }
+                
+                outfile << params.multiloop_penalty << ", " << params.unpaired_penalty 
+                        << ", " << params.branch_penalty << ", " << result << std::endl;
+            }
 
             temp_c += step_size;
         }
         a += step_size;
     }
 
-    
+
     return(0);
 }
